@@ -10,3 +10,6 @@ app.get('/', async (request, response) => {
 });
 
 app.listen(process.env.PORT || 3000, () => console.log(`App available on https://localhost:3000`));
+
+app.use(express.static(__dirname + '/img/'));
+
