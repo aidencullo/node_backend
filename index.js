@@ -1,11 +1,20 @@
-const { EventEmitter } = require('events');
-const eventEmitter = new EventEmitter();
+const { readFile } = require('fs');
+const express = require('express');
 
-eventEmitter.on('lunch', () => {
+const app = express();
 
-    console.log('yum');
+app.get('/', (request, response) => {
 
+    readFile('./home.html', 'utf8', (err, html) => {
+
+	if (err) {
+	    response.status(500).send('sorry, out of order');
+	}
+	
+	response.send(html);
+	
+    })
+    
 });
 
-eventEmitter.emit('lunch');
-eventEmitter.emit('lunch');
+app.listen(process.env.PORT || 3000, () => console.log(`App available on https://localhost:3000`));
