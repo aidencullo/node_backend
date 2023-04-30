@@ -32,14 +32,22 @@ app.post('/blogs', (req, res) => {
     // blog.save().then((blog) => {
     // 	res.status(201).send(blog);
     // }).catch((error) => {
-    // 	res.status(404).send(error);
+    // 	res.status(400).send(error);
     // })
 
     // insert with create
 
-    Blog.create(req.body).then((blog) => {
-	res.status(201).send(blog);
+    // Blog.create(req.body).then((blog) => {
+    // 	res.status(201).send(blog);
+    // }).catch((error) => {
+    // 	res.status(400).send(error);
+    // })
+
+    Blog.insertMany(req.body).then((blogs) => {
+	res.status(201).send(blogs);
     }).catch((error) => {
-	res.status(404).send(error);
+	res.status(400).send(error);
     })
+
+    
 })
