@@ -18,3 +18,11 @@ connect();
 app.listen(8000, () => {
     console.log('listening on port 8000');
 })
+
+app.get('/', (req, res) => {
+    res.send("hello world");
+})
+
+app.get('/params/:param', (req, res) => {
+    res.send("test param passed " + req.params.param);
+})
