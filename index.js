@@ -34,7 +34,7 @@ app.get('/blogs', (req, res) => {
 // POSTS
 
 // create blog doc
-app.post('/blogs', (req, res) => {
+app.post('/blog', (req, res) => {
     Blog.create(req.body).then((blog) => {
 	res.status(201).send(blog);
     }).catch((error) => {

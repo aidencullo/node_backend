@@ -1,13 +1,16 @@
 # node_backend
 
+# Description
+A basic node backend server connected to a mongo database
+
 # GET
 
 ## /blogs
-returns all blog docs in db
+returns all blog docs in testCollection
 
 # POST
 
-## /blogs
+## /blog
 creates a blog doc in testCollection
 
 # Data
@@ -21,5 +24,11 @@ creates a blog doc in testCollection
 ```
 
 ## DB
-called testCollection
+testCollection
 mongodb://localhost:27017/testCollection
+
+# Install
+`npm i`
+
+# Run
+`npm run dev`
