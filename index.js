@@ -25,8 +25,19 @@ app.get('/params/:param', (req, res) => {
 
 // create blog doc
 app.post('/blogs', (req, res) => {
-    const blog = new Blog(req.body);
-    blog.save().then((blog) => {
+
+    // insert with save
+    
+    // const blog = new Blog(req.body);
+    // blog.save().then((blog) => {
+    // 	res.status(201).send(blog);
+    // }).catch((error) => {
+    // 	res.status(404).send(error);
+    // })
+
+    // insert with create
+
+    Blog.create(req.body).then((blog) => {
 	res.status(201).send(blog);
     }).catch((error) => {
 	res.status(404).send(error);
