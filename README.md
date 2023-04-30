@@ -3,6 +3,9 @@
 # Description
 A basic node backend server connected to a mongo database
 
+# Server
+runs on http://localhost:8000
+
 # GET
 
 ## /blogs
