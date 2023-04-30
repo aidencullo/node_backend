@@ -13,6 +13,7 @@ app.use(express.json());
 
 // Routing
 
+// GETS
 app.get('/', (req, res) => {
     res.send("hello world");
 })
@@ -21,33 +22,23 @@ app.get('/params/:param', (req, res) => {
     res.send("test param passed " + req.params.param);
 })
 
-// HTTP Posts
+// retrieve all blog docs
+app.get('/blogs', (req, res) => {
+    Blog.find({}).then((blogs) => {
+	res.status(201).send(blogs);
+    }).catch((error) => {
+	res.status(500).send(error);
+    })
+})
+
+// POSTS
 
 // create blog doc
 app.post('/blogs', (req, res) => {
-
-    // insert with save
-    
-    // const blog = new Blog(req.body);
-    // blog.save().then((blog) => {
-    // 	res.status(201).send(blog);
-    // }).catch((error) => {
-    // 	res.status(400).send(error);
-    // })
-
-    // insert with create
-
-    // Blog.create(req.body).then((blog) => {
-    // 	res.status(201).send(blog);
-    // }).catch((error) => {
-    // 	res.status(400).send(error);
-    // })
-
-    Blog.insertMany(req.body).then((blogs) => {
-	res.status(201).send(blogs);
+    Blog.create(req.body).then((blog) => {
+	res.status(201).send(blog);
     }).catch((error) => {
 	res.status(400).send(error);
     })
-
-    
 })
+
