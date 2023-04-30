@@ -1,44 +1,20 @@
-const { readFile } = require('fs').promises;
-const express = require('express');
-const mongoose = require('mongoose');
+const express = require("express");
+const mongoose = require("mongoose");
+const app = express();
 
 const MONGODB_URI = 'mongodb://localhost:27017/testCollection';
 
-mongoose.connect(MONGODB_URI, {
-   useNewUrlParser: true,
-   useUnifiedTopology: true
-});
+async function connect() {
+    try {
+	await mongoose.connect(MONGODB_URI);
+	console.log("connected to MongoDB");
+    } catch (error) {
+	console.error(error);
+    }
+}
 
-const contactSchema = {
-   email: String,
-   query: String,
-};
+connect();
 
-const Contact = mongoose.model("Contact", contactSchema);
-
-const app = express();
-
-app.get('/', async (request, response) => {
-
-    response.send( await readFile('./home.html', 'utf8') );
-    
-});
-
-app.post("/contact", function (req, res) {
-   const contact = new Contact({
-       email: req.body.email,
-       query: req.body.query,
-   });
-   contact.save(function (err) {
-       if (err) {
-           res.redirect("/error");
-       } else {
-           res.redirect("/thank-you");
-       }
-   });
-});
-
-app.listen(process.env.PORT || 3000, () => console.log(`App available on https://localhost:3000`));
-
-app.use(express.static(__dirname + '/img/'));
-
+app.listen(8000, () => {
+    console.log('listening on port 8000');
+})
