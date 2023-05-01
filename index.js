@@ -13,13 +13,11 @@ app.use(express.json());
 
 // Routing
 
-// GETS
+// GET
+
+// home screen
 app.get('/', (req, res) => {
     res.send("hello world");
-})
-
-app.get('/params/:param', (req, res) => {
-    res.send("test param passed " + req.params.param);
 })
 
 // retrieve all blog
@@ -33,7 +31,6 @@ app.get('/blogs', (req, res) => {
 
 // retrieve specific blog
 app.get('/blogs/:id', (req, res) => {
-
     Blog.findById(req.params.id).then((blog) => {
 	if (!blog) {
 	    return res.status(404).send();
@@ -42,12 +39,12 @@ app.get('/blogs/:id', (req, res) => {
     }).catch((error) => {
 	res.status(500).send(error);
     })
-
 })
+
+// PATCH
 
 // replace specific blog
 app.patch('/blogs/:id', (req, res) => {
-
     Blog.findByIdAndUpdate(req.params.id, req.body, {
 	new: true
     }).then((blog) => {
@@ -58,7 +55,6 @@ app.patch('/blogs/:id', (req, res) => {
     }).catch((error) => {
 	res.status(500).send(error);
     })
-
 })
 
 // POSTS
@@ -72,3 +68,16 @@ app.post('/blog', (req, res) => {
     })
 })
 
+// DELETE
+
+// replace specific blog
+app.delete('/blogs/:id', (req, res) => {
+    Blog.findByIdAndDelete(req.params.id).then((blog) => {
+	if (!blog) {
+	    return res.status(404).send();
+	}
+	res.status(200).send(blog);
+    }).catch((error) => {
+	res.status(500).send(error);
+    })
+})
