@@ -33,6 +33,7 @@ app.get('/blogs', (req, res) => {
 
 // retrieve specific blog
 app.get('/blogs/:id', (req, res) => {
+
     Blog.findById(req.params.id).then((blog) => {
 	if (!blog) {
 	    return res.status(404).send();
@@ -41,6 +42,23 @@ app.get('/blogs/:id', (req, res) => {
     }).catch((error) => {
 	res.status(500).send(error);
     })
+
+})
+
+// replace specific blog
+app.patch('/blogs/:id', (req, res) => {
+
+    Blog.findByIdAndUpdate(req.params.id, req.body, {
+	new: true
+    }).then((blog) => {
+	if (!blog) {
+	    return res.status(404).send();
+	}
+	res.status(200).send(blog);
+    }).catch((error) => {
+	res.status(500).send(error);
+    })
+
 })
 
 // POSTS
