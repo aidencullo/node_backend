@@ -15,14 +15,14 @@ app.use(express.json());
 app.use(bodyParser.json())
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
+
 // Routing
 
 // GET
 
 // home screen
-app.get('/test', (req, res) => {
-    res.sendFile('./form.html', {root: __dirname })
-
+app.get('/', (req, res) => {
+    res.sendFile('.pages/home.html', {root: __dirname })
 })
 
 // retrieve all blog
@@ -44,6 +44,12 @@ app.get('/blogs/:id', (req, res) => {
     }).catch((error) => {
 	res.status(500).send(error);
     })
+})
+
+// form screen
+app.get('/form', (req, res) => {
+    res.sendFile('./pages/form.html', {root: __dirname })
+
 })
 
 // PATCH
@@ -73,9 +79,8 @@ app.post('/blog', (req, res) => {
     })
 })
 
-// post from home.html
-app.post('/test', (req, res) => {
-    console.log(req.body)
+// post from form.html
+app.post('/form', (req, res) => {
     res.send(req.body);
 })
 
