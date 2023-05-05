@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // home screen
 app.get('/', (req, res) => {
-    res.sendFile('.pages/home.html', {root: __dirname })
+    res.sendFile('./pages/home.html', {root: __dirname })
 })
 
 // retrieve all blog
@@ -97,3 +97,6 @@ app.delete('/blogs/:id', (req, res) => {
 	res.status(500).send(error);
     })
 })
+
+
+console.log(process.env.ENV)
