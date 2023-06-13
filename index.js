@@ -98,5 +98,8 @@ app.delete('/blogs/:id', (req, res) => {
     })
 })
 
+const myBlog {
+    name: "testblog",
+}
 
-console.log(process.env.ENV)
+Blog.create(myBlog);
