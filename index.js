@@ -1,8 +1,8 @@
-require('./mongoose');
+// require('./mongoose');
 const express = require("express");
 const app = express();
 const Blog = require('./models/blog');
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
  
 app.listen(8000, () => {
     console.log('listening on port 8000');
@@ -22,7 +22,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // home screen
 app.get('/', (req, res) => {
-    res.sendFile('./pages/home.html', {root: __dirname })
+  // res.sendFile('./pages/home.html', {root: __dirname })
+  res.send('hello from the server')  
 })
 
 // retrieve all blog
@@ -98,8 +99,13 @@ app.delete('/blogs/:id', (req, res) => {
     })
 })
 
-const myBlog {
-    name: "testblog",
-}
+const url = "http://localhost:8000";
 
-Blog.create(myBlog);
+const processJSON = (response) => response.json()
+const processHTML = (response) => response.text()
+const print = (response) => console.log(response)
+const stringify = (response) => JSON.stringify(response)
+
+fetch(url)
+   .then(processHTML)
+   .then(print)
