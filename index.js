@@ -15,7 +15,11 @@ app.use(express.json());
 app.use(bodyParser.json())
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
-
+// printout http request
+app.use(function (req, res, next) {
+  console.log(req.headers)
+  next()
+})
 // Routing
 
 // GET
